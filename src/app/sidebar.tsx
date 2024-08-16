@@ -167,18 +167,18 @@ const Sidebar = () => {
       Home
     </button>      </div>
       <nav className="nav">
-        <a href="/learning" className="navItem tests">
+       {/* <a href="/learning" className="navItem tests">
           <FaQuestionCircle /> Learning
         </a>
         <a href="/learnclass" className="navItem classes">
           <FaGraduationCap /> Learning Classes
-        </a>
+        </a> */}
         <a href="/arena/puzzleArena" className="navItem teachers">
           <FaChalkboardTeacher /> Puzzle Arena
         </a>
-        <a href="/tournaments" className="navItem events">
+        {/* <a href="/tournaments" className="navItem events">
           <FaCalendarAlt /> Tournaments
-        </a>
+        </a> */}
         <a onClick={handleSignOut} className="navItem logout">
           <FaSignOutAlt /> Logout
         </a>

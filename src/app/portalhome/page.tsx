@@ -162,7 +162,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="stats">
+      {/* <div className="stats">
         <div className="stat">
           <div className="label">Lessons Completed</div>
           <div className="number">276</div>
@@ -226,7 +226,7 @@ const Hero = () => {
             </div>
           ))
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
