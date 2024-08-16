@@ -249,7 +249,6 @@ const Admin_image_demo: React.FC = () => {
             level: puzzle.level,
             category: puzzle.category,
             title: puzzle.title,
-            live: puzzle.live,
           }),
         });
 
