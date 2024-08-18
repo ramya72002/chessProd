@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
             </div>
             <div className="overlay">
                 <h2 className="elementor-heading-title elementor-size-default">
-                    Palying chess <br />
+                    Playing chess <br />
                     Makes your<br />
                     Kid<br />
                     {texts.map((text, index) => (
