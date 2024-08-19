@@ -49,9 +49,12 @@ const Hero: React.FC = () => {
             </div>
             <div className="overlay">
                 <h2 className="elementor-heading-title elementor-size-default">
-                    Playing chess <br />
-                    Makes your<br />
-                    Kid<br />
+                <div className="chess-text">
+    Playing chess <br />
+    Makes your<br />
+    Kid<br />
+</div>
+
                     {texts.map((text, index) => (
                         <span key={index} className={visibleTextIndex === index ? 'visible' : 'hidden'}>
                             {text}
