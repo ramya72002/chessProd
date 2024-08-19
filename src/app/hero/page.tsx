@@ -50,10 +50,10 @@ const Hero: React.FC = () => {
             <div className="overlay">
                 <h2 className="elementor-heading-title elementor-size-default">
                 <div className="chess-text">
-    Playing chess <br />
-    Makes your<br />
-    Kid<br />
-</div>
+                Playing chess <br />
+                Makes your<br />
+                Kid<br />
+            </div>
 
                     {texts.map((text, index) => (
                         <span key={index} className={visibleTextIndex === index ? 'visible' : 'hidden'}>
@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
                         <Image src={`/images/image${index}.png`} alt={`i${index}`} layout="fill" objectFit="cover" />
                         <div className="overlay1"></div>
                         <div className="text-overlay1">
-                            {texts[index - 1]} <span className='arrow'>→</span>
+                           
                         </div>
                     </div>
                 ))}
@@ -89,5 +89,4 @@ const Hero: React.FC = () => {
         </div>
     );
 };
-
 export default Hero;
