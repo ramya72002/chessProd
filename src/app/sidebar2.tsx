@@ -3,28 +3,94 @@ import "./side2.scss";
 import { useRouter } from "next/navigation";
 
 const topics = [
-  { title: "Module1", isQuiz: false, completed: true },
-  { title: "Module2", isQuiz: true, completed: true },
-  { title: "Module3", isQuiz: false, completed: true },
-  { title: "Module4", isQuiz: true, completed: true },
-  { title: "Module5", isQuiz: false, completed: true },
-]
+  {
+    title: "Basics Of Chess",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Chessboard and Pieces Overview", completed: true },
+      { title: "Basic Chess Rules", completed: true },
+      { title: "Chess Notation Basics", completed: true }
+    ]
+  },
+  {
+    title: "Opening Principles",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Control of the Center", completed: true },
+      { title: "Development of Pieces", completed: true },
+      { title: "Common Opening Mistakes", completed: true }
+    ]
+  },
+  {
+    title: "Middle Game Strategies",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Pawn Structures", completed: true },
+      { title: "Piece Coordination", completed: true },
+      { title: "Planning and Strategy", completed: true }
+    ]
+  },
+  {
+    title: "Endgame Techniques",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Basic Checkmates", completed: true },
+      { title: "King and Pawn Endgames", completed: true },
+      { title: "Rook and Minor Piece Endgames", completed: true }
+    ]
+  },
+  {
+    title: "Advanced Tactics",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Forks and Pins", completed: true },
+      { title: "Discovered Attacks", completed: true },
+      { title: "Deflection and Decoy", completed: true }
+    ]
+  },
+  {
+    title: " Positional Play",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "Weak Squares and Weak Pawns", completed: true },
+      { title: "Space and Piece Activity", completed: true },
+      { title: "Positional Sacrifices", completed: true }
+    ]
+  },
+  {
+    title: "Chess Psychology and Mindset",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "The Importance of Focus and Concentration", completed: true },
+      { title: "Handling Pressure in Competitive Play", completed: true },
+      { title: "Understanding Your Opponent", completed: true }
+    ]
+  }
+  // Other modules...
+];
 
 const Sidebar2: React.FC = () => {
   const router = useRouter();
   const [isSidebarMinimized, setIsSidebarMinimized] = useState(false);
+  const [activeModule, setActiveModule] = useState<string | null>(null);
 
-  const toggleSidebar = () => {
-    setIsSidebarMinimized(!isSidebarMinimized);
-  };
+  const toggleSidebar = () => setIsSidebarMinimized(!isSidebarMinimized);
 
-  const handleGoBack = () => {
-    router.push('/learning'); // Go back to the previous page
-  };
+  const handleGoBack = () => router.push('/learning');
 
   const handleTopicClick = (title: string) => {
-    // Navigate to the module's route
-    router.push(`/level1Modules/${title.toLowerCase()}`);
+    setActiveModule(prev => (title === prev ? null : title));
+  };
+
+  const handleSubmoduleClick = (title: string) => {
+    router.push(`/level1Modules/${activeModule?.toLowerCase()}/${title.toLowerCase()}`);
   };
 
   return (
@@ -44,7 +110,7 @@ const Sidebar2: React.FC = () => {
           <div className="module-header">
             <span>Basics Of Chess</span>
             <span className="progress">
-              <span className="topics-count">5 Topics</span> | 
+              <span className="topics-count">{topics.length} Topics</span> | 
               <span className="quizzes-count">0 Quizzes</span>
             </span>
           </div>
@@ -53,10 +119,25 @@ const Sidebar2: React.FC = () => {
               <div
                 className={`topic ${topic.completed ? "completed" : ""}`}
                 key={index}
-                onClick={() => handleTopicClick(topic.title)}
               >
-                <span className={`icon ${topic.completed ? "check" : ""}`}></span>
-                <span className="title">{topic.title}</span>
+                <div onClick={() => handleTopicClick(topic.title)}>
+                  {/* <span className={`icon ${topic.completed ? "check" : ""}`}></span> */}
+                  <span className="title">{topic.title}</span>
+                </div>
+                {activeModule === topic.title && (
+                  <div className="submodules">
+                    {topic.submodules.map((submodule, subIndex) => (
+                      <div
+                        className={`submodule ${submodule.completed ? "completed" : ""}`}
+                        key={subIndex}
+                        onClick={() => handleSubmoduleClick(submodule.title)}
+                      >
+                        <span className={`icon ${submodule.completed ? "check" : ""}`}></span>
+                        <span className="title">{submodule.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
