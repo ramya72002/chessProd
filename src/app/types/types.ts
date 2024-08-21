@@ -76,6 +76,7 @@ export interface Student {
         [puzzle: string]: {
           started: boolean;
           option_guessed: number | null;
+          timer:number|0;
           score: number;
         };
       };
@@ -99,6 +100,7 @@ export interface UserDetails {
         [puzzle: string]: {
           started: boolean;
           option_guessed: number | null;
+          timer:number|0;
           score: number;
         };
       };
