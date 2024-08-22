@@ -4,73 +4,109 @@ import { useRouter } from "next/navigation";
 
 const topics = [
   {
-    title: "Basics Of Chess",
+    title: "1. Introduction",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Chessboard and Pieces Overview", completed: true },
-      { title: "Basic Chess Rules", completed: true },
-      { title: "Chess Notation Basics", completed: true }
+      { title: "1.1 Introduction", completed: true },
     ]
   },
   {
-    title: "Opening Principles",
+    title: "2. The Chessboard",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Control of the Center", completed: true },
-      { title: "Development of Pieces", completed: true },
-      { title: "Common Opening Mistakes", completed: true }
+      { title: "2.1 Board Set-up", completed: true },
+      { title: "2.2 Letters & Numbers", completed: true },
+      { title: "2.3 Understanding 'File'", completed: true },
+      { title: "2.4 Understanding 'Rank'", completed: true },
+      { title: "2.5 Understanding 'Diagonals'", completed: true },
+      { title: "2.6 Name of the Squares", completed: true }
     ]
   },
   {
-    title: "Middle Game Strategies",
+    title: "3. Introduction to Pieces",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Pawn Structures", completed: true },
-      { title: "Piece Coordination", completed: true },
-      { title: "Planning and Strategy", completed: true }
+      { title: "3.1 Know the Pieces", completed: true },
+      { title: "3.2 'Major' and 'Minor' Pieces", completed: true },
+      { title: "3.3 Understanding the ‘King’", completed: true },
+      { title: "3.4 Understanding the ‘Bishop’", completed: true },
+      { title: "3.5 Understanding the 'Rook’", completed: true },
+      { title: "3.6 Understanding the ‘Knight’", completed: true },
+      { title: "3.7 Understanding the ‘Pawn’", completed: true },
+      { title: "3.8 Understanding the ‘Queen’", completed: true }
     ]
   },
   {
-    title: "Endgame Techniques",
+    title: "4. Arraignment of Pieces",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Basic Checkmates", completed: true },
-      { title: "King and Pawn Endgames", completed: true },
-      { title: "Rook and Minor Piece Endgames", completed: true }
+      { title: "4.1 Light Side", completed: true },
+      { title: "4.2 Dark Side", completed: true }
     ]
   },
   {
-    title: "Advanced Tactics",
+    title: "5. Special Moves",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Forks and Pins", completed: true },
-      { title: "Discovered Attacks", completed: true },
-      { title: "Deflection and Decoy", completed: true }
+      { title: "5.1 Castling", completed: true },
+      { title: "5.2 Promotion", completed: true },
+      { title: "5.3 En-passant", completed: true }
     ]
   },
   {
-    title: " Positional Play",
+    title: "6. Winning in Chess",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "Weak Squares and Weak Pawns", completed: true },
-      { title: "Space and Piece Activity", completed: true },
-      { title: "Positional Sacrifices", completed: true }
+      { title: "6.1 Checkmate", completed: true },
+      { title: "6.2 Checks", completed: true },
+      { title: "6.3 Stalemate", completed: true },
+      { title: "6.4 Principles of Attacking", completed: true },
+      { title: "6.5 Art of Attacking – Capture", completed: true },
+      { title: "6.6  Draw", completed: true }
     ]
   },
   {
-    title: "Chess Psychology and Mindset",
+    title: "7. Understanding Piece Exchanges",
     isQuiz: false,
     completed: true,
     submodules: [
-      { title: "The Importance of Focus and Concentration", completed: true },
-      { title: "Handling Pressure in Competitive Play", completed: true },
-      { title: "Understanding Your Opponent", completed: true }
+      { title: "7.1 Fair Trade", completed: true },
+      { title: "7.2 Exchange Up", completed: true },
+      { title: "7.3 Exchange Down", completed: true },
+      { title: "7.4 Material Up", completed: true },
+      { title: "7.5 Material Down", completed: true },
+    ]
+  },
+  {
+    title: "8. Let’s Start Playing 3 Stages of the Game: Opening, Middlegame and Endgam",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "8.1 Opening", completed: true },
+      { title: "8.2 Middlegame", completed: true },
+      { title: "8.3 Endgame", completed: true }
+    ]
+  },
+  {
+    title: "9. Understanding Notations",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "9.1 Understanding Notations", completed: true }
+    ]
+  },
+  {
+    title: "10. Chess Game: Let’s study a game",
+    isQuiz: false,
+    completed: true,
+    submodules: [
+      { title: "10.1 Chess Game: Let’s study a game", completed: true }
     ]
   }
   // Other modules...
@@ -90,7 +126,17 @@ const Sidebar2: React.FC = () => {
   };
 
   const handleSubmoduleClick = (title: string) => {
-    router.push(`/level1Modules/${activeModule?.toLowerCase()}/${title.toLowerCase()}`);
+    if (title === "1.1 Chessboard and Pieces Overview") {
+      router.push("/modules/m1");
+    } else if (title === "1.2 Basic Chess Rules") {
+      router.push("/modules/m2");
+    } else if (title === "1.3 Chess Notation Basics") {
+      router.push("/modules/m3");
+    } else {
+      const formattedModule = activeModule?.toLowerCase().replace(/\s+/g, '-');
+      const formattedSubmodule = title.toLowerCase().replace(/\s+/g, '-');
+      router.push(`/level1Modules/${formattedModule}/${formattedSubmodule}`);
+    }
   };
 
   return (
@@ -121,7 +167,6 @@ const Sidebar2: React.FC = () => {
                 key={index}
               >
                 <div onClick={() => handleTopicClick(topic.title)}>
-                  {/* <span className={`icon ${topic.completed ? "check" : ""}`}></span> */}
                   <span className="title">{topic.title}</span>
                 </div>
                 {activeModule === topic.title && (
