@@ -267,7 +267,7 @@ const PuzzleArena = () => {
     {Object.values(loading).some((isLoading) => isLoading) && (
       <div className="loading-overlay">
         <div className="loading-page">
-          <img src="/images/loading1.gif" alt="Loading..." />
+          <img src="/images/loading.gif" alt="Loading..." />
         </div>
       </div>
     )}
