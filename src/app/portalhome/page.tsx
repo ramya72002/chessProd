@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './portal.scss';
 import { UserDetails, UpcomingActivity } from '../types/types';
-import Loading from '../Loading';
 
 const Hero = () => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
