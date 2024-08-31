@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaHome,FaSignOutAlt,FaPuzzlePiece, FaQuestionCircle, FaGraduationCap, FaChalkboardTeacher, FaCalendarAlt, FaNewspaper } from 'react-icons/fa';
+import { FaPuzzlePiece,FaTrophy,FaSignOutAlt, FaQuestionCircle, FaGraduationCap, FaChalkboardTeacher, FaCalendarAlt, FaNewspaper } from 'react-icons/fa';
 import axios from 'axios';
 import './side.scss';
 import { UserDetails } from './types/types';
@@ -13,10 +13,28 @@ const Sidebar = () => {
   const handleViewProfile = () => {
     router.push('/portalhome');
   };
-  const handleSignOut = () => {
-   
-    localStorage.clear(); // Clear all items from local storage
-    router.push('/'); // Redirect to the home page
+  const handleSignOut = async () => {
+    const email = localStorage.getItem('email');
+  
+    if (email) {
+      try {
+        // Make API call to delete the session_id field
+        await axios.post('https://backend-chess-tau.vercel.app/delete_session', { email });
+  
+        // Clear local storage
+        localStorage.clear();
+  
+        // Redirect to the home page
+        router.push('/');
+      } catch (error) {
+        console.error('Error during sign out:', error);
+        alert('An error occurred while signing out. Please try again later.');
+      }
+    } else {
+      // If no email found in local storage
+      localStorage.clear();
+      router.push('/');
+    }
   };
   const [profilePic, setProfilePic] = useState('/images/portal/b4.png'); // Default profile picture
   const [showAvatarOptions, setShowAvatarOptions] = useState(false); // Toggle state for avatar options visibility
@@ -162,27 +180,40 @@ const Sidebar = () => {
   )}
 </div>
         <div className="name">{userDetails ? userDetails.name : 'Student'}</div>
-        <div className="role">Student</div>
+        {/* <div className="role">Student</div> */}
         <button onClick={handleViewProfile} className="viewProfile">
       Home
     </button>      </div>
-      <nav className="nav">
-       {/* <a href="/learning" className="navItem tests">
-          <FaQuestionCircle /> Learning
-        </a>
-        <a href="/learnclass" className="navItem classes">
-          <FaGraduationCap /> Learning Classes
-        </a> */}
-        <a href="/arena/puzzleArena" className="navItem teachers">
-          <FaPuzzlePiece /> Puzzle Arena
-        </a>
-        {/* <a href="/tournaments" className="navItem events">
-          <FaCalendarAlt /> Tournaments
-        </a> */}
-        <a onClick={handleSignOut} className="navItem logout">
-          <FaSignOutAlt /> Logout
-        </a>
-      </nav>
+    <nav className="nav">
+  <a href="/learning" className="navItem tests">
+    <FaGraduationCap /> Learning
+  </a>
+  
+  <a href="/Afterschool" className="navItem school">
+    <FaCalendarAlt /> After School Classes
+  </a>
+  
+  <a href="/coaching" className="navItem test">
+    <FaChalkboardTeacher /> Coaching
+  </a>
+
+  <a href="/learnclass" className="navItem classes">
+    <FaQuestionCircle /> Learning Classes
+  </a>
+
+  <a href="/arena/puzzleArena" className="navItem teachers">
+    <FaPuzzlePiece /> Puzzle Arena
+  </a>
+
+  <a href="/tournaments" className="navItem events">
+    <FaTrophy /> Tournaments
+  </a>
+
+  <a onClick={handleSignOut} className="navItem logout">
+    <FaSignOutAlt /> Logout
+  </a>
+</nav>
+
     </div>
   );
 };
