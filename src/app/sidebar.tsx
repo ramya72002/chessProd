@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaHome,FaSignOutAlt, FaQuestionCircle, FaGraduationCap, FaChalkboardTeacher, FaCalendarAlt, FaNewspaper } from 'react-icons/fa';
+import { FaHome,FaSignOutAlt,FaPuzzlePiece, FaQuestionCircle, FaGraduationCap, FaChalkboardTeacher, FaCalendarAlt, FaNewspaper } from 'react-icons/fa';
 import axios from 'axios';
 import './side.scss';
 import { UserDetails } from './types/types';
@@ -174,7 +174,7 @@ const Sidebar = () => {
           <FaGraduationCap /> Learning Classes
         </a> */}
         <a href="/arena/puzzleArena" className="navItem teachers">
-          <FaChalkboardTeacher /> Puzzle Arena
+          <FaPuzzlePiece /> Puzzle Arena
         </a>
         {/* <a href="/tournaments" className="navItem events">
           <FaCalendarAlt /> Tournaments
