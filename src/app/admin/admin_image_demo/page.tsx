@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './admin_image_demo.scss';
 import Model from '@/app/Model';
+import withadminAuth from '@/app/withadminAuth';
 
 interface FileData {
   id: string;
@@ -401,4 +402,4 @@ const Admin_image_demo: React.FC = () => {
   );
 };
 
-export default Admin_image_demo;
+export default withadminAuth(Admin_image_demo);
