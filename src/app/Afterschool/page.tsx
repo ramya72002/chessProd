@@ -4,6 +4,7 @@ import './Afterschool.scss';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { UserDetails } from '../types/types';
+import withAuth from '../withAuth';
 
 // Define the course paths
 const coursePaths: { [key: string]: string } = {
@@ -187,4 +188,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default withAuth(MyAccount);

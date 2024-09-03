@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './portal.scss';
 import { UserDetails, UpcomingActivity } from '../types/types';
+import withAuth from '../withAuth';
 
 const Hero = () => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
@@ -233,4 +234,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default withAuth(Hero);

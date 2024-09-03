@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link'; // Import Link from next/link
 import './learning.scss';
 import { UserDetails } from '../types/types'; // Import the type if you have it defined
+import withAuth from '../withAuth';
 
 const MyAccount = () => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
@@ -90,4 +91,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default withAuth(MyAccount);

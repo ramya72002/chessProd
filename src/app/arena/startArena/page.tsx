@@ -3,7 +3,7 @@ import './startArena.scss'; // Import globally
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
+import withAuth from '@/app/withAuth';
 import { ImageData } from '../../types/types';
 import Loading from '@/app/Loading';
 
@@ -178,4 +178,4 @@ const StartArena = () => {
   );
 };
 
-export default StartArena;
+export default withAuth(StartArena);

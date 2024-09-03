@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-
+"use client";
 import React from 'react';
 import './inprogress.scss';
+import withAuth from '../withAuth';
 
 // interface LessonStep {
 //   title: string;
@@ -97,4 +98,4 @@ const InProgress: React.FC = () => {
   );
 };
 
-export default InProgress;
+export default withAuth(InProgress);
