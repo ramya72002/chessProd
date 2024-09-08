@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './portal.scss';
 import { UserDetails, UpcomingActivity } from '../types/types';
+import Loading from '../Loading';
 import withAuth from '../withAuth';
 
 const Hero = () => {
@@ -15,18 +16,14 @@ const Hero = () => {
       if (typeof window !== 'undefined') {
         const userDetailsString = localStorage.getItem('userDetails');
         const storedUserDetails = userDetailsString ? JSON.parse(userDetailsString) : null;
-        
-        if (storedUserDetails && storedUserDetails.image) {
-          setUserDetails(storedUserDetails);
-        }
-
-        const email = storedUserDetails?.email;
+        console.log("local",storedUserDetails)
+        setUserDetails(storedUserDetails);
 
         try {
-          if (email) {
-            const response = await axios.get(`https://backend-chess-tau.vercel.app/getuserdetails?email=${email}`);
-            setUserDetails(response.data.data);
-          }
+          const response = await axios.get(
+            `https://backend-dev-chess.vercel.app/getuserdetails?email=${storedUserDetails.email}`
+          );
+          setUserDetails(response.data.data);
         } catch (error) {
           console.error('Error fetching user details:', error);
         }
@@ -36,9 +33,8 @@ const Hero = () => {
     const fetchUpcomingActivities = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://backend-chess-tau.vercel.app/sessions');
-        const data = response.data[0].upcoming_activities;
-        setUpcomingActivities(data);
+        const response = await axios.get('https://backend-dev-chess.vercel.app/sessions');
+        setUpcomingActivities(response.data[0].upcoming_activities);
       } catch (error) {
         console.error('Error fetching Upcoming Activities:', error);
       } finally {
@@ -52,7 +48,7 @@ const Hero = () => {
 
   const getActiveClass = (level: string) => {
     if (!userDetails) return '';
-    
+
     const levelMap: { [key: string]: number } = {
       level1: 1,
       level2: 2,
@@ -61,19 +57,26 @@ const Hero = () => {
       level5: 5,
       level6: 6,
     };
-  
+
     const userLevel = levelMap[userDetails.level];
     const currentLevel = levelMap[level];
-  
+
     return currentLevel <= userLevel ? 'active' : 'inactive';
   };
-  
+
+  if (!userDetails) {
+    // If userDetails is null, return null to prevent rendering the page
+    return null;
+  }
+
   return (
     <div style={{ padding: '20px' }}>
-    <div className="hero">
-      <div className="header">
-        <h2>Chess Journey of <span>{userDetails ? userDetails.name : 'Student'}</span></h2>
-      </div>
+      <div className="hero">
+        <div className="header">
+          <h2>
+            Chess Journey of <span>{userDetails.name}</span>
+          </h2>
+        </div>
 
       <div className="journey-container">
         <div className="chess-journey">
