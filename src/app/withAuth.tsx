@@ -26,7 +26,7 @@ const withAuth = (WrappedComponent: React.ComponentType<any>) => {
           if (localUserDetails?.email) {
             try {
               const response = await axios.get(
-                `https://backend-dev-chess.vercel.app/getuserdetails?email=${localUserDetails.email}`
+                `https://backend-chess-tau.vercel.app/getuserdetails?email=${localUserDetails.email}`
               );
               const apiUserDetails = response.data.data;
               setUserDetails(apiUserDetails); // Store API data

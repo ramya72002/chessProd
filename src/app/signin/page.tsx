@@ -52,7 +52,7 @@ const SignIn = () => {
     try {
       const deviceType = getDeviceType(); // Get device type
 
-      const loginResponse = await axios.post('https://backend-dev-chess.vercel.app/login', {
+      const loginResponse = await axios.post('https://backend-chess-tau.vercel.app/login', {
         email: emailToSignIn,
         device_name: deviceType // Send device type to the backend
       });
@@ -68,7 +68,7 @@ const SignIn = () => {
 
         localStorage.setItem('email', emailToSignIn);
 
-        const userDetailsResponse = await axios.get('https://backend-dev-chess.vercel.app/getuserdetails', {
+        const userDetailsResponse = await axios.get('https://backend-chess-tau.vercel.app/getuserdetails', {
           params: { email: emailToSignIn }
         });
 
@@ -100,7 +100,7 @@ const SignIn = () => {
     if (email) {
       try {
         // Make API call to delete the session
-        const response = await axios.post('https://backend-dev-chess.vercel.app/delete_session', { email });
+        const response = await axios.post('https://backend-chess-tau.vercel.app/delete_session', { email });
 
         if (response.data.success) {
           // Automatically click the sign-in button
@@ -122,7 +122,7 @@ const SignIn = () => {
   const verifyOtp = async () => {
     setLoading(true); // Start loading
     try {
-      const verifyOtpResponse = await axios.post('https://backend-dev-chess.vercel.app/verify_otp', { email, otp });
+      const verifyOtpResponse = await axios.post('https://backend-chess-tau.vercel.app/verify_otp', { email, otp });
       console.log('Verify OTP response:', verifyOtpResponse.data);
 
       if (verifyOtpResponse.data.success) {
